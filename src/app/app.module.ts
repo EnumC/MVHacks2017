@@ -7,6 +7,9 @@ import { AlertModule } from "ngx-bootstrap";
 import { Routes, RouterModule } from "@angular/router";
 import { MaterializeModule } from "angular2-materialize";
 import {HttpModule, JsonpModule, Jsonp, Response} from "@angular/http";
+import { WebCamComponent } from 'ack-angular-webcam';
+
+
 
 import { AppComponent } from './app.component';
 
@@ -33,7 +36,8 @@ const routes: Routes = [
         RouterModule
     ],
     declarations: [
-        AppComponent
+        AppComponent,
+        WebCamComponent
     ],
     bootstrap: [AppComponent]
 })
