@@ -19,4 +19,7 @@
 <!-- Content -->
 <div class="container">
   <router-outlet></router-outlet>
+  <ack-webcam [(ref)]="webcam" [options]="options" (onSuccess)="onCamSuccess($event)" (onError)="onCamError($event)"></ack-webcam>
+  <button (click)="genBase64()"> generate base64 </button>
+  <button (click)="genPostData()"> generate post data </button>
 </div>
