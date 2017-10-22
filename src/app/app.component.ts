@@ -2,8 +2,9 @@ import {Component} from "@angular/core";
 import { Observable, BehaviorSubject } from "rxjs";
 import {Router} from "@angular/router";
 import {MaterializeModule} from "angular2-materialize";
-import {Http, Request} from '@angular/http';
+import {Http, Request, Response, Headers, HttpModule} from '@angular/http';
 import {WebCamComponent} from  'ack-angular-webcam';
+import 'rxjs/add/operator/map';
 
 @Component({
     selector: 'app-root',
@@ -41,16 +42,42 @@ export class AppComponent {
      
       //a pretend process that would post the webcam photo taken
       postFormData(formData){
-        const config = {
-          method:"post",
-          url:"https://enumc.com/mchackathon2017/CognitiveWebAppPractice/STT.php",
-          body: formData
-         
-        }
+
+        
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        
+        this.http.post(
+            'https://enumc-web.herokuapp.com/mvhackathon2017/CognitiveWebAppPractice/STT.php', 
+            {formData: "hi"},
+            {headers:headers}
+        ).map(
+            (res: Response) => res.json()
+        ).subscribe(
+            (res:any) => {
+                // this.postResponse = res;
+                console.log("VALUE RECEIVED: ",res);
+            },
+            (x) => {
+                /* this function is executed when there's an ERROR */
+                console.log("ERROR: "+x);
+            },
+            () => {
+                /* this function is executed when the observable ends (completes) its stream */
+                console.log("Completed");
+            }
+        );
+
+
+
+
+
+
+
      
-        const request = new Request(config)
-     
-        return this.http.request( request )
+        // const request = new Post(config)
+        console.log('test');
+        // return this.http.post("https://enumc.com/mvhackathon2017/CognitiveWebAppPractice/STT.php", formData);
         
       }
      
